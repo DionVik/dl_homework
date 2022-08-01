@@ -35,6 +35,7 @@ class School:
         for i in self.__groups:
             group_numbers_list = i.number
         return group_numbers_list
+
         	
 class Group:
     def __init__(self, input_group_number):
@@ -63,7 +64,7 @@ class Group:
     def teachers(self):
         teachers_fio_list = []
         for teacher in self.__teachers:
-            teachers_fio_list.append(teacher.name)
+            teachers_fio_list.append(teacher.fio)
         return teachers_fio_list
         
     #список предметов изучаемых в группе
@@ -78,33 +79,38 @@ class Group:
     @property
     def number(self):
         return self.__number			
-	
-class Teacher:
-    def __init__(self, teacher_fio_input, subject_input):
-        self.__teacher_fio = teacher_fio_input
+
+class Person:
+    def __init__(self, input_surname, input_name, input_parent_name):
+        self.surname = input_surname
+        self.name = input_name
+        self.parent_name = input_parent_name
+        self.person_fio = self.surname + ' ' + (self.name[0]).upper() +'.' + (self.parent_name[0]).upper() + '.'
+        
+        	
+class Teacher(Person):
+    def __init__(self, input_surname, input_name, input_parent_name, subject_input):
+        super().__init__(input_surname, input_name, input_parent_name)
         self.__subject_name = subject_input
         
     #получить фио учителя    
     @property
-    def name(self):
-        return self.__teacher_fio
+    def fio(self):
+        return self.person_fio
         
     #получить предмет учителя    
     @property
     def subject(self):
         return self.__subject_name
-			
-class Pupil:   
+        
+        			
+class Pupil(Person):   
     def __init__(self, input_surname, input_name, input_parent_name):
-        self.__surname = input_surname
-        self.__name = input_name
-        self.__parent_name = input_parent_name
-        self.__fio = self.__surname + ' ' + (self.__name[0]).upper() +\
-'.' + (self.__parent_name[0]).upper() + '.'
+        super().__init__(input_surname, input_name, input_parent_name) 
         self.__father_name = '' 
         self.__mother_name = ''
-        self.__group = None 
-   
+        self.__group = None
+              
     #получить школьные данные ученика 
     def get_school_data(self, school):
         for group in school.get_groups():
@@ -124,7 +130,7 @@ class Pupil:
     #получить фио ученика    
     @property
     def fio(self):
-        return self.__fio   
+        return self.person_fio   
     
     #получить фио отца   
     @property
@@ -157,7 +163,6 @@ print('Отец ученика {}: {}'.format(pup1.fio, pup1.father))
 pup1.mother = 'Ефремова Лидия Александровна'
 print('Мать ученика {}: {}'.format(pup1.fio, pup1.mother))
 
-
 #ученик 2
 pup2 = Pupil('Ридош', 'Ольга', 'Борисовна')
 print('ФИО ученика pup2: {}'.format(pup2.fio))	
@@ -167,8 +172,8 @@ pup2.mother = 'Ридош Наталья Семёновна'
 print('Мать ученика {}: {}'.format(pup2.fio, pup2.mother))
 
 #Учитель 1
-teach1 = Teacher('Иванов С.А.', 'Русский язык')
-teach2 = Teacher('Петров Д.А.', 'Математика')
+teach1 = Teacher('Иванов', 'Сергей', 'Алексеевич', 'Русский язык')
+teach2 = Teacher('Петров', 'Дмитрий', 'Анатольевич', 'Математика')
 
 #Группа 1а
 gr1 = Group('1a')

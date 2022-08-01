@@ -3,8 +3,7 @@
 
 import math
 
-class Treug():
-   
+class Triangle:
     def __init__(self, ax, ay, bx, by, cx, cy):
         self.ax = ax
         self.ay = ay
@@ -17,13 +16,13 @@ class Treug():
         self.bc = self.length_side(self.bx, self.by, self.cx, self.cy)
         self.ac = self.length_side(self.ax, self.ay, self.cx, self.cy)
         #периметр
-        self.perimetr = self.perimetr_treug(self.ab, self.bc, self.ac)
+        self.perimetr = self.perimetr_triangle(self.ab, self.bc, self.ac)
         #высота
-        self.height = self.height_treug(self.ab, self.bc, self.ac)
+        self.height = self.height_triangle(self.ab, self.bc, self.ac)
         #площадь
-        self.area = self.area_treug(self.ac, self.height)
+        self.area = self.area_triangle(self.ac, self.height)
     #высота треугольника       
-    def height_treug(self, a, b, c):
+    def height_triangle(self, a, b, c):
         p = (a + b + c) / 2
         return (2 * math.sqrt(p * (p - a) * (p - b) * (p - c))) / a
     #длина отрезка
@@ -31,24 +30,26 @@ class Treug():
         xy = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
         return xy
     #площадь тругольника     
-    def area_treug(self, height, ac):
+    def area_triangle(self, height, ac):
         return ac * height / 2
     #периметр    
-    def perimetr_treug(self, a, b, c):
+    def perimetr_triangle(self, a, b, c):
         return a + b + c
 
-tr = Treug(0, 0, 3, 5, 4, 0)
+tr = Triangle(0, 0, 3, 5, 4, 0)
 print('Периметр: {:.3}'.format(tr.perimetr))
 print('Высота: {:.3}'.format(tr.height))
 print('Площадь: {:.3}'.format(tr.height))
+        
+
 
 # Задача-2: Написать Класс "Равнобочная трапеция", заданной координатами 4-х точек.
 # Предусмотреть в классе методы:
 # проверка, является ли фигура равнобочной трапецией;
 # вычисления: длины сторон, периметр, площадь.
-
 import math
-class Trap:
+
+class Trapezoid:
     def __init__(self, points_list):
         self.ax = points_list[0]
         self.ay = points_list[1]
@@ -69,9 +70,10 @@ class Trap:
         #периметр
         self.perimetr = self.ab + self.bc + self.cd + self.ad
         #высота
-        self.height = math.sqrt((self.ab ** 2) - ((((self.ad - self.bc) ** 2) / 4)) / 4)
+        self.height = math.sqrt((self.ab ** 2) - ((((self.ad - self.bc)\
+** 2) / 4)) / 4)
         #площадь
-        self.area = self.area_trap(self.height, self.ad, self.bc)
+        self.area = self.area_trapezoid(self.height, self.ad, self.bc)
     #длина отрезка
     def length_side (self, x1, y1, x2, y2):
         xy = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
@@ -81,18 +83,21 @@ class Trap:
         if self.ac == self.bd:
             return True
     #площадь    
-    def area_trap(self, h, a, b):
+    def area_trapezoid(self, h, a, b):
         return h * (a + b) / 2
 
 
 points = (0, 0, 2, 4, 4, 4, 6, 0)
-tr = Trap(points)
+tr = Trapezoid(points)
 if tr.is_equal:
     print('Трапеция равнобедренная')
     print('Периметр = {:.3}'.format(tr.perimetr))
-    print('Стороны: ab = {0:.3}, bc = {1:.3}, cd = {2:.3}, ad = {3:.3}'.format(tr.ab, tr.bc, tr.cd, tr.ad)) 
+    print('Стороны: ab = {0:.3}, bc = {1:.3}, cd = {2:.3}, ad = {3:.3}'\
+.format(tr.ab, tr.bc, tr.cd, tr.ad)) 
     print('Высота = {:.3}'.format(tr.height))
     print('Площадь = {:.3}'.format(tr.area))
 else:
-	print('Трапеция не равнобедренная')
+    print('Трапеция не равнобедренная')
+
+
 
