@@ -5,7 +5,7 @@ result_lst = []
 #читаем файл workers.txt в список
 with open ('workers.txt', 'r') as f:
 	workers_lst = f.readlines()
-#читаем файл workers.txt в список
+#читаем файл hours.txt в список
 with open('hours_of.txt', 'r') as f:
 	hours_lst = f.readlines()
 #удаляем из списков строки с шапкой таблицы
