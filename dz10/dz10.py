@@ -1,27 +1,32 @@
-
+#Создание классов автосалона и автомобиля. Салон имеет список автомобилей. Автомобиль имеет техн.характеристики и информацию о деталях, требующих ремонта.
 #класс автосалона
 class CarDealerShip:
     def __init__(self, nameInput):
         self.__carsList = []
         self.__name = nameInput
         self.__count = 0
- 
+        
+    #получить список имеющихся автомобилей     
     @property
     def get_cars(self):
         return self.__carsList
-
+    
+    #Название автосалона 
     @property
     def name(self):
         return self.__name
-     
+    
+    #количество автомобилей в списке автосалона
     @property
     def count(self):
         return self.__count
     
+    #добавление автомобиля в список
     def add_car(self, car):
         self.__carsList.append(car)
         self.__count += 1
     
+    #удаление автомобиля из списка
     def remove_car(self, car):
         self.__carsList.remove(car)
         self.__count -= 1 
@@ -41,7 +46,8 @@ class Car:
         self.__resultCost = self.__carCost
         self.__repareNameList = []  #список названий деталей требующих ремонта
         self.__reparePartList = []  #список объектов деталей требующих ремонта
-        
+    
+    #Вин номер
     @property
     def vin(self):
         return self.__vin
@@ -49,7 +55,8 @@ class Car:
     @vin.setter
     def vin(self, vinInput):
         self.__vin = vinInput
-        
+    
+    #Марка
     @property
     def mark(self):
         return self.__mark
@@ -57,7 +64,8 @@ class Car:
     @mark.setter
     def mark(self, markInput):
         self.__mark = markInput
-
+        
+    #модель
     @property
     def model(self):
         return self.__model
@@ -65,7 +73,8 @@ class Car:
     @model.setter
     def model(self, modelInput):
         self.__model = modelInput
-
+    
+    #страна изготовления
     @property
     def country(self):
         return self.__country
@@ -73,7 +82,8 @@ class Car:
     @country.setter
     def country(self, countryInput):
         self.__country = countryInput
-
+    
+    #год выпуска
     @property
     def year(self):
         return self.__year  
@@ -81,7 +91,8 @@ class Car:
     @year.setter
     def year(self, yearInput):
         self.__year = yearInput
-
+    
+    #объём двигателя
     @property
     def engine_volume(self):
         return self.__engineVolume    
@@ -89,7 +100,8 @@ class Car:
     @engine_volume.setter
     def engine_volume(self, engineVolumeInput):
         self.__engineVolume = engineVolumeInput
-
+    
+    #пробег
     @property
     def mileage(self):
         return self.__mileage        
@@ -98,9 +110,17 @@ class Car:
     def mileage(self, mileageInput):
         self.__mileage = mileageInput
     
+    #определение деталей, требующих ремонта - передаём список деталей в параметрах метода
     def add_for_repare(self, *args):   #список деталей требующих ремонта
         self.__repareNameList = args
+        
+    @property
+    def repare_part_names(self):
+        return self.__repareNameList
     
+    
+    
+    #создаём объекты выбранных деталей, требующих ремонта и помещаем их в список
     def add_parts_to_repare(self):    #cписок объектов деталей треб.ремонта
         for name in self.__repareNameList:
             if name == 'двигатель':
@@ -111,11 +131,17 @@ class Car:
                 self.__reparePartList.append(Sit())
             elif name=='капот':
                 self.__reparePartList.append(Capot())
+   
+    @property
+    def repare_parts(self):
+        return self.__reparePartList
      
+    #стоимость автомобиля
     @property
     def car_cost(self):
         return self.__carCost
-        
+    
+    #итоговая стоимость автомобиля с учётом ремонта 
     @property            
     def result_cost(self):
         if len(self.__reparePartList) > 0:
@@ -124,14 +150,8 @@ class Car:
         else:
             self.__resultCost = self.__carCost
         return self.__resultCost
-    @property
-    def repare_parts(self):
-        return self.__reparePartList
     
-    @property
-    def repare_part_names(self):
-        return self.__repareNameList
-    
+    #вывод информации 
     @property
     def info(self):
         print(f'Марка: {self.mark}')
@@ -162,7 +182,8 @@ class Lorry(Car):
         self.__loadCapacity =  'undefined' 	
         super().__init__( markInput, modelInput, countryInput, yearInput, 
                 cost_input)
-
+    
+    #для грузовика можно задать грузоподъёмность
     @property
     def load_capacity(self):
         return self.__loadCapacity
@@ -171,6 +192,7 @@ class Lorry(Car):
     def load_capacity(self, loadCapacityInput):
         self.__loadCapacity = loadCapacityInput
     
+    #вывод информации
     @property
     def info(self):
         print(f'Марка: {self.mark}')
@@ -234,6 +256,7 @@ class Capot(RepareParts):
 salon = CarDealerShip('Скорость')
 print(f'Добро пожаловать в наш автосалон подержанных автомобилей', 
     f'"{salon.name}"')
+
 #создаём грузовик
 lorry = Lorry('Zil', '130', 'Russia', '1980', 300000)
 lorry.load_capacity = 10
