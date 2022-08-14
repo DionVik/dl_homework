@@ -200,9 +200,9 @@ for i in ferzi:
             break
 
 if flag:
-    print('Существует пара ферзей, бьющих друг друга: ')
+    print('Yes')
 else:
-    print('Ферзи не бьют друг друга')
+    print('No')
 
 
 
