@@ -6,7 +6,7 @@
     # print(miles)
     
 def convert(km):
-	print('{0} км = {1:.2f} миль'.format(km, km*1.609))
+    print('{0} км = {1:.2f} миль'.format(km, km*1.609))
 
 km = float(input('Введите расстояние в км: '))
 convert(km)
@@ -26,16 +26,16 @@ convert(km)
 
 def my_round(number, ndigits):
     #получаем круглое число, захватывающее ndigits+1 элементов после запятой
-	b = int(number * 10 ** (ndigits + 1))
+    b = int(number * 10 ** (ndigits + 1))
     #избавляемся от последнего элемента и округляем число в зависимости от его значения
-	end_element = b % 10 #вычленяем последний элемент
-	b = int((b - end_element) / 10) #и отбрасываем его 
+    end_element = b % 10 #вычленяем последний элемент
+    b = int((b - end_element) / 10) #и отбрасываем его 
     #если последний элемент  >5, увеличиваем число на 1
-	if end_element > 5:
-		b += 1
-	#получаем число с нужным количеством цифр после запятой
-	b = b / (10 ** ndigits)
-	return b
+    if end_element > 5:
+        b += 1
+    #получаем число с нужным количеством цифр после запятой
+    b = b / (10 ** ndigits)
+    return b
 
 num = float(input('Введите число: '))
 nd = int(input('Введите количество цифр после запятой: '))

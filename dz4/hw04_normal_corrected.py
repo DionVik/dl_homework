@@ -29,12 +29,12 @@ print ('Ряд Фибоначчи от {} элемента до {}: {}'.format(n
 
 #функция сортирующая список по возрастанию
 def sort_to_max(lst):
-	for i in range(0, len(lst)-1):
-		for j in range(0, len(lst)-1-i):
-			if lst[j] > lst[j+1]:
-				lst[j], lst[j+1] = lst[j+1], lst[j]
-	return lst
-		
+    for i in range(0, len(lst)-1):
+        for j in range(0, len(lst)-1-i):
+            if lst[j] > lst[j+1]:
+                lst[j], lst[j+1] = lst[j+1], lst[j]
+    return lst
+    
 lst = [2, 10, -12, 2.5, 20, -11, 4, 4, 0]
 print('Оригинальный список: ', lst)
 print('Отсортированный список: ', sort_to_max(lst))
@@ -47,19 +47,19 @@ print('Отсортированный список: ', sort_to_max(lst))
 #применяет функцию к элементам последовательности и возвращает последовательность из элементов,
 # для которых функция возвратит True
 def my_filter(funk, lst):
-	result=[]
-	for i in lst:
-		if funk(i):
-			result.append(i)
-	return result
-		
+    result=[]
+    for i in lst:
+        if funk(i):
+            result.append(i)
+    return result
+        
 spisok = [1, 2, 3, 4, 5]
 #функция проверки чётности числа для примера
 def proverka_chetnosti(el):
-	if el%2 == 0:
-		return True
-	else:
-		return False		
+    if el%2 == 0:
+        return True
+    else:
+        return False
 
 a= my_filter(proverka_chetnosti, spisok)
 
@@ -73,22 +73,22 @@ print ('Результат: {}'.format(a))
 #функция проверяет список координат точек в разных комбинациях их 
 #расположения, т.к. не известно какая точка имеет нулевую координату
 def check(lst):
-	for i in range(4):
-		print('lst=', lst)
+    for i in range(4):
+        print('lst=', lst)
         #координаты Y у расположенных рядом по горизонтали точек должны
         # быть равны
-		if(lst[0][1] == lst[3][1]) and (lst[1][1] == lst[2][1]): 
+        if(lst[0][1] == lst[3][1]) and (lst[1][1] == lst[2][1]): 
             #смещения у верхних и нижних точек по X должны быть равны
-			if (lst[1][0] - lst[0][0]) == (lst[2][0] - lst[3][0]): 
-				return True
-		lst=lst[-1:] + lst[:-1] #сдвигаем элементы массива на 1 шаг влево,
+            if (lst[1][0] - lst[0][0]) == (lst[2][0] - lst[3][0]): 
+                return True
+        lst=lst[-1:] + lst[:-1] #сдвигаем элементы массива на 1 шаг влево,
         #чтобы проверить следующую комбинацию расположения точек
-	return False	
-	
+    return False
+
 a=[]
 b=[]
 c=[]
-d=[]	
+d=[]
 a.append(int(input('Введите координату x точки А: ')))
 a.append(int(input('Введите координату y точки А: ')))
 b.append(int(input('Введите координату x точки B: ')))
@@ -100,10 +100,9 @@ d.append(int(input('Введите координату y точки D: ')))
 lst=[a, b, c, d]  #список координат точек
 
 if check(lst):
-	print ('Эти точки являются точками параллелограмма')
+    print ('Эти точки являются точками параллелограмма')
 else:
-	print ('Эти точки не являются точками параллелограмма')
+    print ('Эти точки не являются точками параллелограмма')
 
 
-	
 
