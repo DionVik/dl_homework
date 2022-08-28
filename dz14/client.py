@@ -34,6 +34,7 @@ def get_time():
     str(time.localtime(time_object)[5])
     )
     return current_time
+    
 @log
 def json_data_for_sending(name, message, address):
     json_object = {
@@ -60,32 +61,35 @@ def receving(socket, buffer_size):
         print(json_object.get('message'))
         time.sleep(0.2)
         
-print('Starting client')
-client_socket = socket(AF_INET, SOCK_DGRAM)
+def main(): 
+    global shutdown       
+    print('Starting client')
+    client_socket = socket(AF_INET, SOCK_DGRAM)
+    name = input('Your name: ')
+    address = input('Chat with: ')
+    
+    #уведомление о подключении
+    json_message = json_data_for_sending(name, 'Connected to server', address)
+    byte_message = json.dumps(json_message).encode('utf-8') #json в строку и в байты
+    client_socket.sendto(byte_message, server_address)
+    
+    receving_thread = threading.Thread(target = receving, args = (client_socket, max_size),
+    daemon = True)
+    receving_thread.start()
+    
+    while not shutdown:
+        message = input('You::')
+        if message != '':
+            if message == 'exit':
+                shutdown = True
+            json_message = json_data_for_sending(name, message, address)
+            byte_message = json.dumps(json_message).encode('utf-8') #json в строку и в байты
+            client_socket.sendto(byte_message, server_address)
+            time.sleep(0.2)
+            
+    client_socket.close()
 
-name = input('Your name: ')
-address = input('Chat with: ')
-
-#уведомление о подключении
-json_message = json_data_for_sending(name, 'Connected to server', address)
-byte_message = json.dumps(json_message).encode('utf-8') #json в строку и в байты
-client_socket.sendto(byte_message, server_address)
-
-receving_thread = threading.Thread(target = receving, args = (client_socket, max_size),
-daemon = True)
-receving_thread.start()
-
-while not shutdown:
-    message = input('You::')
-    if message != '':
-        if message == 'exit':
-            shutdown = True
-        json_message = json_data_for_sending(name, message, address)
-        byte_message = json.dumps(json_message).encode('utf-8') #json в строку и в байты
-        client_socket.sendto(byte_message, server_address)
-        time.sleep(0.2)
-        
-client_socket.close()
-
+if __name__ == '__main__':
+    main()
 
 

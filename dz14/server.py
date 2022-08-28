@@ -5,6 +5,10 @@ import logging
 import logging.config
 import functools
 
+server_address = ('localhost', 6789)
+max_size = 1024
+clients = {}  #словарь из адресов и имён клиентов
+
 #создание логгера
 logging.config.fileConfig(fname = 'log_config.py', disable_existing_loggers=False)
 loggerServer = logging.getLogger('server' + __name__)
@@ -49,10 +53,7 @@ def get_answer(client_json_message):
     return json_message
 
 def main():
-    server_address = ('localhost', 6789)
-    max_size = 1024
-    clients = {}  #словарь из адресов и имён клиентов
-    
+
     print('Starting the server')
     server_socket = socket(AF_INET, SOCK_DGRAM)
     server_socket.bind(server_address)
