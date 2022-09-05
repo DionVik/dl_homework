@@ -2,10 +2,6 @@ import unittest
 import client
 
 class TestClient(unittest.TestCase):
-    def setUp(self):
-        pass
-    def tearDown(self):
-        pass
     
     def test_client_sending(self):
         name = 'Denis'

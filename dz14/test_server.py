@@ -2,10 +2,6 @@ import unittest
 import server
 
 class TestServer(unittest.TestCase):
-    def setUp(self):
-        pass
-    def tearDown(self):
-        pass
     
     def test_server_answer(self):
         name = 'Denis'
